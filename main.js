@@ -8,6 +8,7 @@ $("#east").click(function () {
 
 $("#westlist li").click(function () {
 	$("body").animate({"left":"0em"}, 500);
+	$("body").css({"opcity":"0.5"});
 });
 
 $("#eastlist li").click(function () {
@@ -135,17 +136,40 @@ $("#eastlist li").click(function (e) {
 	picShow(name, "eastgallery", m, n);
 })
 
+var move = 1;
+
+function movepic() {
+	move ++
+	if(move>4){
+		move = 1;
+	};
+	switch(move){
+		case 1:
+		return $('.gallery img').animate({"top":"-3em","left":"-3em"},3000);
+		break;
+		case 2:
+		return $('.gallery img').animate({"top":"-2em"},3000);
+		break;
+		case 3:
+		return $('.gallery img').animate({"top":"0em","left":"0em"},3000);
+		break;
+		case 4:
+		return $('.gallery img').animate({"top":"0em","left":"0em"},3000);
+	};
+}
 
 function picShow (name, part, m, n) {
-		$("#"+part).append("<img src='./img/"+name+"/"+m+".jpg'>");
+		$("#"+part).append("<img src='./img/"+name+"/"+m+".jpg' style='display:none'>");
+		$('.gallery img').fadeIn(500);
+		movepic();
 		m++;
 		if (m <= n) {
-			setTimeout("$('.gallery img').remove()", 1000);
-			clear = window.setTimeout(function(){picShow(name, part, m, n)}, 1000);
+			setTimeout("$('.gallery img').remove()", 3000);
+			clear = window.setTimeout(function(){picShow(name, part, m, n)}, 3000);
 		}else{
 			m = 1;
-			setTimeout("$('.gallery img').remove()", 1000);
-			clear = window.setTimeout(function(){picShow(name, part, m, n)}, 1000);
+			setTimeout("$('.gallery img').remove()", 3000);
+			clear = window.setTimeout(function(){picShow(name, part, m, n)}, 3000);
 		}
 	};
 // initback();
